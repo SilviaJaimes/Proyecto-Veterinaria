@@ -50,6 +50,16 @@ public class VeterinarioController : BaseApiController
         return new Pager<VeterinarioDto>(listEntidad, entidad.totalRegistros, veterinarioParams.PageIndex, veterinarioParams.PageSize, veterinarioParams.Search);
     }
 
+    [HttpGet("consulta-1/{Especialidad}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> VeterinariosEspecialidad(string Especialidad)
+    {
+        var entidad = await unitofwork.Veterinarios.VeterinariosEspecialidad(Especialidad);
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

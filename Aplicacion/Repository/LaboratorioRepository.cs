@@ -13,6 +13,22 @@ public class LaboratorioRepository : GenericRepository<Laboratorio>, ILaboratori
     {
         _context = context;
     }
+
+    public async Task<IEnumerable<Object>> MedicamentoLaboratorio(string Laboratorio)
+    {
+        var medicamentoLaboratorio = await (
+            from m in _context.Medicamentos
+            join l in _context.Laboratorios on m.IdLaboratorioFk equals l.Id
+            where l.Nombre.ToLower() == Laboratorio.ToLower() 
+            select new 
+            {
+                Nombre = m.Nombre,
+                Laboratorio = l.Nombre
+            }).ToListAsync();
+
+        return medicamentoLaboratorio;
+    }
+
     public override async Task<IEnumerable<Laboratorio>> GetAllAsync()
     {
         return await _context.Laboratorios

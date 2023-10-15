@@ -13,6 +13,21 @@ public class VeterinarioRepository : GenericRepository<Veterinario>, IVeterinari
     {
         _context = context;
     }
+
+    public async Task<IEnumerable<Object>> VeterinariosEspecialidad(string Especialidad)
+    {
+        var veterinariosEspecialidad = await (
+            from v in _context.Veterinarios
+            where v.Especialidad.ToLower() == Especialidad.ToLower() 
+            select new 
+            {
+                Nombre = v.Nombre,
+                Especialidad = v.Especialidad
+            }).ToListAsync();
+
+        return veterinariosEspecialidad;
+    }
+
     public override async Task<IEnumerable<Veterinario>> GetAllAsync()
     {
         return await _context.Veterinarios

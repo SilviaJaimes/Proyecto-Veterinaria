@@ -50,6 +50,16 @@ public class PropietarioController : BaseApiController
         return new Pager<PropietarioDto>(listEntidad, entidad.totalRegistros, propietarioParams.PageIndex, propietarioParams.PageSize, propietarioParams.Search);
     }
 
+    [HttpGet("consulta-4")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> PropietariosConMascotas()
+    {
+        var entidad = await unitofwork.Propietarios.PropietariosConMascotas();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

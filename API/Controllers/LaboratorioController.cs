@@ -50,6 +50,16 @@ public class LaboratorioController : BaseApiController
         return new Pager<LaboratorioDto>(listEntidad, entidad.totalRegistros, laboratorioParams.PageIndex, laboratorioParams.PageSize, laboratorioParams.Search);
     }
 
+    [HttpGet("consulta-2/{Laboratorio}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> MedicamentoLaboratorio(string Laboratorio)
+    {
+        var entidad = await unitofwork.Laboratorios.MedicamentoLaboratorio(Laboratorio);
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

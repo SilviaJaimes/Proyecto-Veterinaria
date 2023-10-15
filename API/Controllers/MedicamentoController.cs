@@ -50,6 +50,16 @@ public class MedicamentoController : BaseApiController
         return new Pager<MedicamentoDto>(listEntidad, entidad.totalRegistros, medicamentoParams.PageIndex, medicamentoParams.PageSize, medicamentoParams.Search);
     }
 
+    [HttpGet("consulta-5")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> MedicamentoPrecio50000()
+    {
+        var entidad = await unitofwork.Medicamentos.MedicamentoPrecio50000();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
