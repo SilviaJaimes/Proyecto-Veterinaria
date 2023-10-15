@@ -14,7 +14,7 @@ public class MascotaRepository : GenericRepository<Mascota>, IMascota
         _context = context;
     }
 
-    public async Task<IEnumerable<object>> MascotaEspecie(string Especie)
+    public async Task<IEnumerable<Object>> MascotaEspecie(string Especie)
     {
         var mascotaEspecie = await (
             from ma in _context.Mascotas
@@ -28,7 +28,7 @@ public class MascotaRepository : GenericRepository<Mascota>, IMascota
         return mascotaEspecie;
     }
 
-    public async Task<IEnumerable<object>> MascotasVacunadas2023()
+    public async Task<IEnumerable<Mascota>> MascotasVacunadas2023()
     {
         var inicioTrimestre = new DateOnly(2023, 1, 1);
         var finTrimestre = new DateOnly(2023, 3, 31);

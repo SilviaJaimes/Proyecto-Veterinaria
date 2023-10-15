@@ -50,7 +50,7 @@ public class MascotaController : BaseApiController
         return new Pager<MascotaDto>(listEntidad, entidad.totalRegistros, mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
     }
 
-    [HttpGet("consulta-3")]
+    [HttpGet("consulta-3/{Especie}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> MascotaEspecie(string Especie)
