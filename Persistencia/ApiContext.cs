@@ -20,6 +20,7 @@ public class ApiContext : DbContext
     public DbSet<Propietario> Propietarios { get; set; }
     public DbSet<Proveedor> Proveedores { get; set; }
     public DbSet<Raza> Razas { get; set; }
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<Rol> Roles { get; set; }
     public DbSet<RolUsuario> RolUsuarios { get; set; }
     public DbSet<TipoMovimiento> TipoMovimientos { get; set; }

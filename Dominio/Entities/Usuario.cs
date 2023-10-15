@@ -8,4 +8,5 @@ public class Usuario : BaseEntity
 
     public ICollection<RolUsuario> RolUsuarios { get; set; }
     public ICollection<Rol> Roles { get; set; }
+    public ICollection<RefreshToken> RefreshTokens { get; set; } = new HashSet<RefreshToken>();
 }
