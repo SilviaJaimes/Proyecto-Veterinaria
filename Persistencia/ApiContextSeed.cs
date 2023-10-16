@@ -95,12 +95,16 @@ public class ApiContextSeed
 
             if (!context.Razas.Any())
             {
-                using (var reader = new StreamReader("../Persistencia/Data/Csvs/Raza.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\Raza.csv"))
                 {
-                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
                         var list = csv.GetRecords<Raza>();
-
                         List<Raza> entidad = new List<Raza>();
                         foreach (var item in list)
                         {
@@ -108,7 +112,7 @@ public class ApiContextSeed
                             {
                                 Id = item.Id,
                                 IdEspecieFk = item.IdEspecieFk,
-                                Nombre = item.Nombre,
+                                Nombre = item.Nombre
                             });
                         }
                         context.Razas.AddRange(entidad);
@@ -119,12 +123,16 @@ public class ApiContextSeed
 
             if (!context.Mascotas.Any())
             {
-                using (var reader = new StreamReader("../Persistencia/Data/Csvs/Mascota.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\Mascota.csv"))
                 {
-                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
                         var list = csv.GetRecords<Mascota>();
-
                         List<Mascota> entidad = new List<Mascota>();
                         foreach (var item in list)
                         {
@@ -145,12 +153,16 @@ public class ApiContextSeed
 
             if (!context.Citas.Any())
             {
-                using (var reader = new StreamReader("../Persistencia/Data/Csvs/Cita.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\Cita.csv"))
                 {
-                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
                         var list = csv.GetRecords<Cita>();
-
                         List<Cita> entidad = new List<Cita>();
                         foreach (var item in list)
                         {
@@ -172,12 +184,16 @@ public class ApiContextSeed
 
             if (!context.Medicamentos.Any())
             {
-                using (var reader = new StreamReader("../Persistencia/Data/Csvs/Medicamento.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\Medicamento.csv"))
                 {
-                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
                         var list = csv.GetRecords<Medicamento>();
-
                         List<Medicamento> entidad = new List<Medicamento>();
                         foreach (var item in list)
                         {
@@ -198,12 +214,16 @@ public class ApiContextSeed
 
             if (!context.TratamientoMedicos.Any())
             {
-                using (var reader = new StreamReader("../Persistencia/Data/Csvs/TratamientoMedico.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\TratamientoMedico.csv"))
                 {
-                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
                         var list = csv.GetRecords<TratamientoMedico>();
-
                         List<TratamientoMedico> entidad = new List<TratamientoMedico>();
                         foreach (var item in list)
                         {
@@ -225,12 +245,16 @@ public class ApiContextSeed
 
             if (!context.MovimientoMedicamentos.Any())
             {
-                using (var reader = new StreamReader("../Persistencia/Data/Csvs/MovimientoMedicamento.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\MovimientoMedicamento.csv"))
                 {
-                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
                         var list = csv.GetRecords<MovimientoMedicamento>();
-
                         List<MovimientoMedicamento> entidad = new List<MovimientoMedicamento>();
                         foreach (var item in list)
                         {
@@ -250,12 +274,16 @@ public class ApiContextSeed
 
             if (!context.DetalleMovimientos.Any())
             {
-                using (var reader = new StreamReader("../Persistencia/Data/Csvs/DetalleMovimiento.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\DetalleMovimiento.csv"))
                 {
-                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
                         var list = csv.GetRecords<DetalleMovimiento>();
-
                         List<DetalleMovimiento> entidad = new List<DetalleMovimiento>();
                         foreach (var item in list)
                         {
@@ -276,12 +304,16 @@ public class ApiContextSeed
 
             if (!context.MedicamentoProveedores.Any())
             {
-                using (var reader = new StreamReader("../Persistencia/Data/Csvs/MedicamentoProveedor.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\MedicamentoProveedor.csv"))
                 {
-                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
                         var list = csv.GetRecords<MedicamentoProveedor>();
-
                         List<MedicamentoProveedor> entidad = new List<MedicamentoProveedor>();
                         foreach (var item in list)
                         {
@@ -299,28 +331,12 @@ public class ApiContextSeed
 
             if (!context.Usuarios.Any())
             {
-                using (var reader = new StreamReader("../Persistencia/Data/Csvs/Usuario.csv"))
+                using (var reader = new StreamReader(ruta + @"/Data/Csvs/Usuario.csv"))
                 {
-                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                     {
-                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
-                        MissingFieldFound = null
-                    }))
-                    {
-                        // Resto de tu código para leer y procesar el archivo CSV
                         var list = csv.GetRecords<Usuario>();
-                        List<Usuario> entidad = new List<Usuario>();
-                        foreach (var item in list)
-                        {
-                            entidad.Add(new Usuario
-                            {
-                                Id = item.Id,
-                                Nombre = item.Nombre,
-                                Contraseña = item.Contraseña,
-                                CorreoElectronico = item.CorreoElectronico
-                            });
-                        }
-                        context.Usuarios.AddRange(entidad);
+                        context.Usuarios.AddRange(list);
                         await context.SaveChangesAsync();
                     }
                 }
@@ -328,7 +344,7 @@ public class ApiContextSeed
 
             if (!context.RolUsuarios.Any())
             {
-                using (var reader = new StreamReader("../Persistencia/Data/Csvs/RolUsuario.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csv\RoleUser.csv"))
                 {
                     using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
@@ -344,7 +360,7 @@ public class ApiContextSeed
                             entidad.Add(new RolUsuario
                             {
                                 IdUsuarioFk = item.IdUsuarioFk,
-                                IdRolFk = item.IdRolFk,
+                                IdRolFk = item.IdRolFk
                             });
                         }
                         context.RolUsuarios.AddRange(entidad);
