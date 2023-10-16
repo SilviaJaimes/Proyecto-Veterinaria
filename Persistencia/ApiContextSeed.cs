@@ -14,71 +14,6 @@ public class ApiContextSeed
         try
         {
             var ruta = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            
-            if (!context.Especies.Any())
-            {
-                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/Especie.csv"))
-                {
-                    using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
-                    {
-                        var list = csv.GetRecords<Especie>();
-                        context.Especies.AddRange(list);
-                        await context.SaveChangesAsync();
-                    }
-                }
-            } 
-
-            if (!context.Laboratorios.Any())
-            {
-                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/Laboratorio.csv"))
-                {
-                    using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
-                    {
-                        var list = csv.GetRecords<Laboratorio>();
-                        context.Laboratorios.AddRange(list);
-                        await context.SaveChangesAsync();
-                    }
-                }
-            } 
-
-            if (!context.Propietarios.Any())
-            {
-                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/Propietario.csv"))
-                {
-                    using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
-                    {
-                        var list = csv.GetRecords<Propietario>();
-                        context.Propietarios.AddRange(list);
-                        await context.SaveChangesAsync();
-                    }
-                }
-            } 
-
-            if (!context.Proveedores.Any())
-            {
-                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/Proveedor.csv"))
-                {
-                    using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
-                    {
-                        var list = csv.GetRecords<Proveedor>();
-                        context.Proveedores.AddRange(list);
-                        await context.SaveChangesAsync();
-                    }
-                }
-            } 
-
-            if (!context.TipoMovimientos.Any())
-            {
-                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/TipoMovimiento.csv"))
-                {
-                    using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
-                    {
-                        var list = csv.GetRecords<TipoMovimiento>();
-                        context.TipoMovimientos.AddRange(list);
-                        await context.SaveChangesAsync();
-                    }
-                }
-            } 
 
             if (!context.Veterinarios.Any())
             {
@@ -88,6 +23,19 @@ public class ApiContextSeed
                     {
                         var list = csv.GetRecords<Veterinario>();
                         context.Veterinarios.AddRange(list);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            } 
+
+            if (!context.Especies.Any())
+            {
+                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/Especie.csv"))
+                {
+                    using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
+                    {
+                        var list = csv.GetRecords<Especie>();
+                        context.Especies.AddRange(list);
                         await context.SaveChangesAsync();
                     }
                 }
@@ -116,6 +64,101 @@ public class ApiContextSeed
                             });
                         }
                         context.Razas.AddRange(entidad);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+
+            if (!context.Propietarios.Any())
+            {
+                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/Propietario.csv"))
+                {
+                    using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
+                    {
+                        var list = csv.GetRecords<Propietario>();
+                        context.Propietarios.AddRange(list);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            } 
+
+            if (!context.Proveedores.Any())
+            {
+                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/Proveedor.csv"))
+                {
+                    using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
+                    {
+                        var list = csv.GetRecords<Proveedor>();
+                        context.Proveedores.AddRange(list);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            } 
+
+            if (!context.Usuarios.Any())
+            {
+                using (var reader = new StreamReader(ruta + @"/Data/Csvs/Usuario.csv"))
+                {
+                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    {
+                        var list = csv.GetRecords<Usuario>();
+                        context.Usuarios.AddRange(list);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+
+            if (!context.Laboratorios.Any())
+            {
+                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/Laboratorio.csv"))
+                {
+                    using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
+                    {
+                        var list = csv.GetRecords<Laboratorio>();
+                        context.Laboratorios.AddRange(list);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            } 
+
+            if (!context.TipoMovimientos.Any())
+            {
+                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/TipoMovimiento.csv"))
+                {
+                    using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
+                    {
+                        var list = csv.GetRecords<TipoMovimiento>();
+                        context.TipoMovimientos.AddRange(list);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            } 
+
+            if (!context.Medicamentos.Any())
+            {
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\Medicamento.csv"))
+                {
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
+                        var list = csv.GetRecords<Medicamento>();
+                        List<Medicamento> entidad = new List<Medicamento>();
+                        foreach (var item in list)
+                        {
+                            entidad.Add(new Medicamento
+                            {
+                                Id = item.Id,
+                                Nombre = item.Nombre,
+                                CantidadDisponible = item.CantidadDisponible,
+                                Precio = item.Precio,
+                                IdLaboratorioFk = item.IdLaboratorioFk
+                            });
+                        }
+                        context.Medicamentos.AddRange(entidad);
                         await context.SaveChangesAsync();
                     }
                 }
@@ -182,9 +225,9 @@ public class ApiContextSeed
                 }
             }
 
-            if (!context.Medicamentos.Any())
+            if (!context.MedicamentoProveedores.Any())
             {
-                using (var reader = new StreamReader(ruta + @"\Data\Csvs\Medicamento.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\MedicamentoProveedor.csv"))
                 {
                     using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
@@ -193,51 +236,17 @@ public class ApiContextSeed
                     }))
                     {
                         // Resto de tu código para leer y procesar el archivo CSV
-                        var list = csv.GetRecords<Medicamento>();
-                        List<Medicamento> entidad = new List<Medicamento>();
+                        var list = csv.GetRecords<MedicamentoProveedor>();
+                        List<MedicamentoProveedor> entidad = new List<MedicamentoProveedor>();
                         foreach (var item in list)
                         {
-                            entidad.Add(new Medicamento
+                            entidad.Add(new MedicamentoProveedor
                             {
-                                Id = item.Id,
-                                Nombre = item.Nombre,
-                                CantidadDisponible = item.CantidadDisponible,
-                                Precio = item.Precio,
-                                IdLaboratorioFk = item.IdLaboratorioFk
-                            });
-                        }
-                        context.Medicamentos.AddRange(entidad);
-                        await context.SaveChangesAsync();
-                    }
-                }
-            }
-
-            if (!context.TratamientoMedicos.Any())
-            {
-                using (var reader = new StreamReader(ruta + @"\Data\Csvs\TratamientoMedico.csv"))
-                {
-                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
-                    {
-                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
-                        MissingFieldFound = null
-                    }))
-                    {
-                        // Resto de tu código para leer y procesar el archivo CSV
-                        var list = csv.GetRecords<TratamientoMedico>();
-                        List<TratamientoMedico> entidad = new List<TratamientoMedico>();
-                        foreach (var item in list)
-                        {
-                            entidad.Add(new TratamientoMedico
-                            {
-                                Id = item.Id,
-                                IdCitaFk = item.IdCitaFk,
                                 IdMedicamentoFk = item.IdMedicamentoFk,
-                                Dosis = item.Dosis,
-                                FechaAdministracion = item.FechaAdministracion,
-                                Observacion = item.Observacion
+                                IdProveedorFk = item.IdProveedorFk
                             });
                         }
-                        context.TratamientoMedicos.AddRange(entidad);
+                        context.MedicamentoProveedores.AddRange(entidad);
                         await context.SaveChangesAsync();
                     }
                 }
@@ -302,9 +311,9 @@ public class ApiContextSeed
                 }
             }
 
-            if (!context.MedicamentoProveedores.Any())
+            if (!context.TratamientoMedicos.Any())
             {
-                using (var reader = new StreamReader(ruta + @"\Data\Csvs\MedicamentoProveedor.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\TratamientoMedico.csv"))
                 {
                     using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
@@ -313,30 +322,21 @@ public class ApiContextSeed
                     }))
                     {
                         // Resto de tu código para leer y procesar el archivo CSV
-                        var list = csv.GetRecords<MedicamentoProveedor>();
-                        List<MedicamentoProveedor> entidad = new List<MedicamentoProveedor>();
+                        var list = csv.GetRecords<TratamientoMedico>();
+                        List<TratamientoMedico> entidad = new List<TratamientoMedico>();
                         foreach (var item in list)
                         {
-                            entidad.Add(new MedicamentoProveedor
+                            entidad.Add(new TratamientoMedico
                             {
+                                Id = item.Id,
+                                IdCitaFk = item.IdCitaFk,
                                 IdMedicamentoFk = item.IdMedicamentoFk,
-                                IdProveedorFk = item.IdProveedorFk
+                                Dosis = item.Dosis,
+                                FechaAdministracion = item.FechaAdministracion,
+                                Observacion = item.Observacion
                             });
                         }
-                        context.MedicamentoProveedores.AddRange(entidad);
-                        await context.SaveChangesAsync();
-                    }
-                }
-            }
-
-            if (!context.Usuarios.Any())
-            {
-                using (var reader = new StreamReader(ruta + @"/Data/Csvs/Usuario.csv"))
-                {
-                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-                    {
-                        var list = csv.GetRecords<Usuario>();
-                        context.Usuarios.AddRange(list);
+                        context.TratamientoMedicos.AddRange(entidad);
                         await context.SaveChangesAsync();
                     }
                 }
@@ -344,7 +344,7 @@ public class ApiContextSeed
 
             if (!context.RolUsuarios.Any())
             {
-                using (var reader = new StreamReader(ruta + @"\Data\Csv\RoleUser.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\RolUsuario.csv"))
                 {
                     using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
