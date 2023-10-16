@@ -6,6 +6,10 @@ using Dominio.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
+
+[ApiVersion("1.0")]
+[ApiVersion("1.1")]
+
 public class MascotaController : BaseApiController
 {
     private readonly IUnitOfWork unitofwork;
@@ -18,6 +22,7 @@ public class MascotaController : BaseApiController
     }
 
     [HttpGet]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<MascotaDto>>> Get()
@@ -39,10 +44,10 @@ public class MascotaController : BaseApiController
         return this.mapper.Map<MascotaDto>(entidad);
     }
 
-    [HttpGet("paginacion")]
+    [HttpGet]
+    [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<Pager<MascotaDto>>> GetPaginacion([FromQuery] Params mascotaParams)
     {
         var entidad = await unitofwork.Mascotas.GetAllAsync(mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);

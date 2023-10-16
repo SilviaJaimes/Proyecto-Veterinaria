@@ -6,6 +6,10 @@ using Dominio.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
+
+[ApiVersion("1.0")]
+[ApiVersion("1.1")]
+
 public class LaboratorioController : BaseApiController
 {
     private readonly IUnitOfWork unitofwork;
@@ -18,6 +22,7 @@ public class LaboratorioController : BaseApiController
     }
 
     [HttpGet]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<LaboratorioDto>>> Get()
@@ -39,10 +44,10 @@ public class LaboratorioController : BaseApiController
         return this.mapper.Map<LaboratorioDto>(entidad);
     }
 
-    [HttpGet("paginacion")]
+    [HttpGet]
+    [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<Pager<LaboratorioDto>>> GetPaginacion([FromQuery] Params laboratorioParams)
     {
         var entidad = await unitofwork.Laboratorios.GetAllAsync(laboratorioParams.PageIndex, laboratorioParams.PageSize, laboratorioParams.Search);

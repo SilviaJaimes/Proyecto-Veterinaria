@@ -7,6 +7,10 @@ using Dominio.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
+
+[ApiVersion("1.0")]
+[ApiVersion("1.1")]
+
 public class UserController : BaseApiController
 {
     private readonly IUserService _userService;
@@ -21,6 +25,7 @@ public class UserController : BaseApiController
     }
 
     [HttpGet]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<UsuarioDto>>> Get()
@@ -43,10 +48,10 @@ public class UserController : BaseApiController
         return this.mapper.Map<UsuarioDto>(entidad);
     }
 
-    [HttpGet("paginacion")]
+    [HttpGet]
+    [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<Pager<UsuarioDto>>> GetPaginacion([FromQuery] Params usuarioParams)
     {
         var entidad = await unitofwork.Usuarios.GetAllAsync(usuarioParams.PageIndex, usuarioParams.PageSize, usuarioParams.Search);

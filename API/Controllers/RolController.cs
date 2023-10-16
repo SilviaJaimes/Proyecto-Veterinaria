@@ -6,6 +6,10 @@ using Dominio.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
+
+[ApiVersion("1.0")]
+[ApiVersion("1.1")]
+
 public class RolController : BaseApiController
 {
     private readonly IUnitOfWork unitofwork;
@@ -18,6 +22,7 @@ public class RolController : BaseApiController
     }
 
     [HttpGet]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<RolDto>>> Get()
@@ -39,10 +44,10 @@ public class RolController : BaseApiController
         return this.mapper.Map<RolDto>(entidad);
     }
 
-    [HttpGet("paginacion")]
+    [HttpGet]
+    [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<Pager<RolDto>>> GetPaginacion([FromQuery] Params rolParams)
     {
         var entidad = await unitofwork.Roles.GetAllAsync(rolParams.PageIndex, rolParams.PageSize, rolParams.Search);

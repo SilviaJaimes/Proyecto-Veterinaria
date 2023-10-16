@@ -6,6 +6,10 @@ using Dominio.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
+
+[ApiVersion("1.0")]
+[ApiVersion("1.1")]
+
 public class PropietarioController : BaseApiController
 {
     private readonly IUnitOfWork unitofwork;
@@ -18,6 +22,7 @@ public class PropietarioController : BaseApiController
     }
 
     [HttpGet]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<PropietarioDto>>> Get()
@@ -39,10 +44,10 @@ public class PropietarioController : BaseApiController
         return this.mapper.Map<PropietarioDto>(entidad);
     }
 
-    [HttpGet("paginacion")]
+    [HttpGet]
+    [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<Pager<PropietarioDto>>> GetPaginacion([FromQuery] Params propietarioParams)
     {
         var entidad = await unitofwork.Propietarios.GetAllAsync(propietarioParams.PageIndex, propietarioParams.PageSize, propietarioParams.Search);
