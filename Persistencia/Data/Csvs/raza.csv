@@ -1,6 +1,6 @@
-Id,IdEspecieFk,Nombre
-1,1,Felino
-2,2,Golden Retriever
-3,2,Husky
-4,3,Parrot
-5,4,Iguana
+Id,Nombre,IdEspecieFk
+1,Felino,1
+2,Golden Retriever,2
+3,Husky,2
+4,Parrot,3
+5,Iguana,4
