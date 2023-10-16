@@ -51,8 +51,8 @@ using (var scope = app.Services.CreateScope())
 	{
 		var context = services.GetRequiredService<ApiContext>();
 		await context.Database.MigrateAsync();
-/* 		await ApiContextSeed.SeedRolesAsync(context,loggerFactory);
-		await ApiContextSeed.SeedAsync(context,loggerFactory); */
+		await ApiContextSeed.SeedRolesAsync(context,loggerFactory);
+		await ApiContextSeed.SeedAsync(context,loggerFactory);
 	}
 	catch (Exception ex)
 	{

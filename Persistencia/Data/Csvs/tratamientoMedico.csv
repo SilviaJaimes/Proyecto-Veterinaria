@@ -1,0 +1,6 @@
+Id,IdCitaFk,IdMedicamentoFk,Dosis,FechaAdministracion,Observacion
+1,1,1,2,2023-01-15,Observación A
+2,2,2,1,2023-02-20,Observación B
+3,3,3,3,2023-03-05,Observación C
+4,4,4,1,2023-01-28,Observación D
+5,5,5,2,2023-02-25,Observación E
