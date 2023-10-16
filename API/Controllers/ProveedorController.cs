@@ -6,12 +6,12 @@ using Dominio.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
-public class ProveedorControlle : BaseApiController
+public class ProveedorController : BaseApiController
 {
     private readonly IUnitOfWork unitofwork;
     private readonly  IMapper mapper;
 
-    public ProveedorControlle( IUnitOfWork unitofwork, IMapper mapper)
+    public ProveedorController( IUnitOfWork unitofwork, IMapper mapper)
     {
         this.unitofwork = unitofwork;
         this.mapper = mapper;

@@ -8,4 +8,6 @@ public interface IMascota : IGenericRepository<Mascota>
     Task<IEnumerable<Mascota>> MascotasVacunadas2023();
     Task<IEnumerable<object>> MascotasPorEspecie();
     Task<IEnumerable<Mascota>> MascotasPorVeterinario(string Veterinario);
+    Task<IEnumerable<object>> MascotasYPropietariosPorRaza(string Raza);
+    Task<IEnumerable<object>> CantidadMascotasPorRaza();
 }

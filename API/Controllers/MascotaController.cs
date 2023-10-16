@@ -90,6 +90,26 @@ public class MascotaController : BaseApiController
         return Ok(dto);
     }
 
+    [HttpGet("consulta-11/{Raza}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> MascotasYPropietariosPorRaza(string Raza)
+    {
+        var entidad = await unitofwork.Mascotas.MascotasYPropietariosPorRaza(Raza);
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
+    [HttpGet("consulta-12")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> CantidadMascotasPorRaza()
+    {
+        var entidad = await unitofwork.Mascotas.CantidadMascotasPorRaza();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

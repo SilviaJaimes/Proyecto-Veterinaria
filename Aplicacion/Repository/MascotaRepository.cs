@@ -72,6 +72,46 @@ public class MascotaRepository : GenericRepository<Mascota>, IMascota
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<object>> MascotasYPropietariosPorRaza(string Raza)
+    {
+        var mascotasYPropietariosPorRaza = await (
+            from ma in _context.Mascotas
+            join p in _context.Propietarios on ma.IdPropietarioFk equals p.Id
+            where ma.Raza.Nombre.ToLower() == Raza.ToLower() 
+            select new 
+            {
+                NombreMascota = ma.Nombre,
+                NombrePropietario = p.Nombre
+            }).ToListAsync();
+
+        return mascotasYPropietariosPorRaza;
+    }
+
+    public async Task<IEnumerable<object>> CantidadMascotasPorRaza()
+    {
+        var mascotasPorRaza = await _context.Mascotas
+            .GroupBy(m => m.IdRazaFk)
+            .Select(g => new 
+            {
+                IdRaza = g.Key,
+                Cantidad = g.Count()
+            })
+            .ToListAsync();
+
+        var razas = await _context.Razas
+            .ToDictionaryAsync(r => r.Id, r => r.Nombre);
+
+        var resultado = mascotasPorRaza
+            .Select(m => new 
+            {
+                Raza = razas[m.IdRaza],
+                CantidadMascotas = m.Cantidad
+            })
+            .ToList();
+
+        return resultado;
+    }
+
     public override async Task<IEnumerable<Mascota>> GetAllAsync()
     {
         return await _context.Mascotas
