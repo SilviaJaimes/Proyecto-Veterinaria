@@ -50,6 +50,16 @@ public class ProveedorControlle : BaseApiController
         return new Pager<ProveedorDto>(listEntidad, entidad.totalRegistros, proveedorParams.PageIndex, proveedorParams.PageSize, proveedorParams.Search);
     }
 
+    [HttpGet("consulta-10/{Medicamento}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> ProveedorMedicamento(string Medicamento)
+    {
+        var entidad = await unitofwork.Proveedores.ProveedorMedicamento(Medicamento);
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -62,6 +62,16 @@ public class MascotaRepository : GenericRepository<Mascota>, IMascota
         ).ToListAsync();
     }
 
+    public async Task<IEnumerable<Mascota>> MascotasPorVeterinario(string Veterinario)
+    {
+        return await _context.Citas
+            .Include(c => c.Mascota)
+            .Where(c => c.Veterinario.Nombre == Veterinario)
+            .Select(c => c.Mascota)
+            .Distinct()
+            .ToListAsync();
+    }
+
     public override async Task<IEnumerable<Mascota>> GetAllAsync()
     {
         return await _context.Mascotas
