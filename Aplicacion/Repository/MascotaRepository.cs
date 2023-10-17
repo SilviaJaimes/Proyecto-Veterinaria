@@ -28,19 +28,27 @@ public class MascotaRepository : GenericRepository<Mascota>, IMascota
         return mascotaEspecie;
     }
 
-    public async Task<IEnumerable<Mascota>> MascotasVacunadas2023()
+    public async Task<IEnumerable<object>> MascotasVacunadas2023()
     {
-        var inicioTrimestre = new DateOnly(2023, 1, 1);
-        var finTrimestre = new DateOnly(2023, 3, 31);
+        int year = 2023; 
+        DateTime primerTrimestreInicio = new DateTime(year, 1, 1); 
+        DateTime primerTrimestreFin = new DateTime(year, 3, 31); 
 
-        return await _context.Mascotas
-            .Include(ma => ma.Citas)
-            .Where(
-                ma => ma.Citas.Any(
-                c => c.Fecha >= inicioTrimestre && 
-                c.Fecha <= finTrimestre && 
-                c.Motivo.ToLower() == "vacunación")
-            ).ToListAsync();
+        var Vacunadas = await (
+            from c in _context.Citas
+            join m in _context.Mascotas on c.IdMascotaFk equals m.Id
+
+            where c.Motivo == "Vacunación" && 
+                c.Hora >= primerTrimestreInicio && c.Hora <= primerTrimestreFin
+
+            select new{
+                NombreMascota = m.Nombre,
+                Motivo = c.Motivo,
+                FechaNacimientoMascota = m.FechaNacimiento,
+                FechaCita = c.Hora
+            }).Distinct()
+            .ToListAsync();
+        return Vacunadas;
     }
 
     public async Task<IEnumerable<object>> MascotasPorEspecie()

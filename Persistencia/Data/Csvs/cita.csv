@@ -1,6 +1,6 @@
 Id,Fecha,Hora,Motivo,IdMascotaFk,IdVeterinarioFk
-1,2023-01-15,10:00:00,Vacunación,6,1
+1,2023-01-15,2023-02-17,Vacunación,6,1
 2,2023-02-20,14:00:00,Consulta general,4,2
-3,2023-03-05,16:00:00,Vacunación,5,1
-4,2023-01-28,10:30:00,Vacunación,4,3
+3,2023-03-05,2023-02-17,Vacunación,5,1
+4,2023-01-28,2023-02-17,Vacunación,4,3
 5,2023-02-25,11:00:00,Revisión dental,5,4

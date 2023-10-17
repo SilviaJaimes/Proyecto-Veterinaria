@@ -22,7 +22,6 @@ public class UserService : IUserService
         _unitOfWork = unitOfWork;
         _passwordHasher = passwordHasher;
     }
-
     public async Task<string> RegisterAsync(RegisterDto registerDto)
     {
         var user = new Usuario
@@ -32,20 +31,27 @@ public class UserService : IUserService
         };
 
         user.Contraseña = _passwordHasher.HashPassword(user, registerDto.Contraseña); //Encrypt password
-
+        Console.WriteLine("paso contra");
         var existingUser = _unitOfWork.Usuarios
                                     .Find(u => u.Nombre.ToLower() == registerDto.Nombre.ToLower())
                                     .FirstOrDefault();
 
         if (existingUser == null)
         {
+            Console.WriteLine("1");
             var rolDefault = _unitOfWork.Roles
                                     .Find(u => u.Nombre == Authorization.rol_default.ToString())
                                     .First();
             try
             {
+                            Console.WriteLine("2");
+                            Console.WriteLine(Authorization.rol_default.ToString());
                 user.Roles.Add(rolDefault);
+                                            Console.WriteLine("3");
+
                 _unitOfWork.Usuarios.Add(user);
+                                            Console.WriteLine("4");
+
                 await _unitOfWork.SaveAsync();
 
                 return $"User  {registerDto.Nombre} has been registered successfully";
@@ -61,35 +67,39 @@ public class UserService : IUserService
             return $"User {registerDto.Nombre} already registered.";
         }
     }
-
     public async Task<DataUserDto> GetTokenAsync(LoginDto model)
     {
+        Console.WriteLine("aaaa");
         DataUserDto dataUserDto = new DataUserDto();
-        var usuario = await _unitOfWork.Usuarios
+        var user = await _unitOfWork.Usuarios
                     .GetByUsernameAsync(model.Nombre);
 
-        if (usuario == null)
+        if (user == null)
         {
             dataUserDto.IsAuthenticated = false;
             dataUserDto.Message = $"User does not exist with username {model.Nombre}.";
             return dataUserDto;
         }
 
-        var result = _passwordHasher.VerifyHashedPassword(usuario, usuario.Contraseña, model.Contraseña);
+        var result = _passwordHasher.VerifyHashedPassword(user, user.Contraseña, model.Contraseña);
 
         if (result == PasswordVerificationResult.Success)
         {
             dataUserDto.IsAuthenticated = true;
-            JwtSecurityToken jwtSecurityToken = CreateJwtToken(usuario);
-            dataUserDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-            dataUserDto.UserName = usuario.Nombre;
-            dataUserDto.Roles = usuario.Roles
-                                            .Select(u => u.Nombre)
-                                            .ToList();
+            JwtSecurityToken jwtSecurityToken = CreateJwtToken(user);
+                                                        Console.WriteLine("3");
 
-            if (usuario.RefreshTokens.Any(a => a.IsActive))
+            dataUserDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+                                                        Console.WriteLine("4");
+
+            dataUserDto.UserName = user.Nombre;
+            dataUserDto.Roles = user.Roles
+                .Select(u => u.Nombre)
+                .ToList();
+
+            if (user.RefreshTokens.Any(a => a.IsActive))
             {
-                var activeRefreshToken = usuario.RefreshTokens.Where(a => a.IsActive == true).FirstOrDefault();
+                var activeRefreshToken = user.RefreshTokens.Where(a => a.IsActive == true).FirstOrDefault();
                 dataUserDto.RefreshToken = activeRefreshToken.Token;
                 dataUserDto.RefreshTokenExpiration = activeRefreshToken.Expires;
             }
@@ -98,29 +108,28 @@ public class UserService : IUserService
                 var refreshToken = CreateRefreshToken();
                 dataUserDto.RefreshToken = refreshToken.Token;
                 dataUserDto.RefreshTokenExpiration = refreshToken.Expires;
-                usuario.RefreshTokens.Add(refreshToken);
-                _unitOfWork.Usuarios.Update(usuario);
+                user.RefreshTokens.Add(refreshToken);
+                _unitOfWork.Usuarios.Update(user);
                 await _unitOfWork.SaveAsync();
             }
 
             return dataUserDto;
         }
         dataUserDto.IsAuthenticated = false;
-        dataUserDto.Message = $"Credenciales incorrectas para el usuario {usuario.Nombre}.";
+        dataUserDto.Message = $"Credenciales incorrectas para el usuario {user.Nombre}.";
         return dataUserDto;
     }
-
     public async Task<string> AddRoleAsync(AddRoleDto model)
     {
 
-        var usuario = await _unitOfWork.Usuarios
+        var user = await _unitOfWork.Usuarios
                     .GetByUsernameAsync(model.Nombre);
-        if (usuario == null)
+        if (user == null)
         {
             return $"User {model.Nombre} does not exists.";
         }
 
-        var result = _passwordHasher.VerifyHashedPassword(usuario, usuario.Contraseña, model.Contraseña);
+        var result = _passwordHasher.VerifyHashedPassword(user, user.Contraseña, model.Contraseña);
 
         if (result == PasswordVerificationResult.Success)
         {
@@ -130,12 +139,12 @@ public class UserService : IUserService
 
             if (rolExists != null)
             {
-                var userHasRole = usuario.Roles.Any(u => u.Id == rolExists.Id);
+                var userHasRole = user.Roles.Any(u => u.Id == rolExists.Id);
 
                 if (userHasRole == false)
                 {
-                    usuario.Roles.Add(rolExists);
-                    _unitOfWork.Usuarios.Update(usuario);
+                    user.Roles.Add(rolExists);
+                    _unitOfWork.Usuarios.Update(user);
                     await _unitOfWork.SaveAsync();
                 }
 
@@ -179,8 +188,10 @@ public class UserService : IUserService
         dataUserDto.IsAuthenticated = true;
         JwtSecurityToken jwtSecurityToken = CreateJwtToken(usuario);
         dataUserDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-
+        /*         dataUserDto.CorreoElectronico = usuario.CorreoElectronico;
+         */
         dataUserDto.UserName = usuario.Nombre;
+        dataUserDto.Email = usuario.CorreoElectronico;
         dataUserDto.Roles = usuario.Roles
                                         .Select(u => u.Nombre)
                                         .ToList();
@@ -214,7 +225,7 @@ public class UserService : IUserService
         {
                                 new Claim(JwtRegisteredClaimNames.Sub, usuario.Nombre),
                                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-/*                              new Claim(JwtRegisteredClaimNames.Email, usuario.Email), */
+                                new Claim(JwtRegisteredClaimNames.Email, usuario.CorreoElectronico),
                                 new Claim("uid", usuario.Id.ToString())
                         }
         .Union(roleClaims);
@@ -227,24 +238,5 @@ public class UserService : IUserService
             expires: DateTime.UtcNow.AddMinutes(_jwt.DurationInMinutes),
             signingCredentials: signingCredentials);
         return jwtSecurityToken;
-    }
-
-    public async Task<Usuario> ValidateCredentialsAsync(LoginDto model)
-    {
-        var usuario = await _unitOfWork.Usuarios.GetByUsernameAsync(model.Nombre);
-
-        if (usuario == null)
-        {
-            return (null); // El usuario no existe en la base de datos.
-        }
-
-        var result = _passwordHasher.VerifyHashedPassword(usuario, usuario.Contraseña, model.Contraseña);
-
-        if (result == PasswordVerificationResult.Success)
-        {
-            return (usuario); // Las credenciales son válidas.
-        }
-
-        throw new InvalidOperationException("Las credenciales son incorrectas."); // Excepción en caso de credenciales incorrectas.
     }
 }

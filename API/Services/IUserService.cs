@@ -8,5 +8,4 @@ public interface IUserService
     Task<DataUserDto> GetTokenAsync(LoginDto model);
     Task<string> AddRoleAsync(AddRoleDto model);
     Task<DataUserDto> RefreshTokenAsync(string refreshToken);
-    Task<Usuario> ValidateCredentialsAsync(LoginDto model);
 }

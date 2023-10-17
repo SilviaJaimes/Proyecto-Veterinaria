@@ -11,13 +11,13 @@ namespace API.Controllers;
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
 
-public class UserController : BaseApiController
+public class UsuarioController : BaseApiController
 {
     private readonly IUserService _userService;
     private readonly IUnitOfWork unitofwork;
     private readonly IMapper mapper;
 
-    public UserController(IUserService userService, IUnitOfWork unitofwork, IMapper mapper)
+    public UsuarioController(IUserService userService, IUnitOfWork unitofwork, IMapper mapper)
     {
         this.unitofwork = unitofwork;
         this.mapper = mapper;
@@ -69,7 +69,9 @@ public class UserController : BaseApiController
     [HttpPost("token")]
     public async Task<IActionResult> GetTokenAsync(LoginDto model)
     {
+        Console.WriteLine("2");
         var result = await _userService.GetTokenAsync(model);
+        Console.WriteLine("3");
         SetRefreshTokenInCookie(result.RefreshToken);
         return Ok(result);
     }

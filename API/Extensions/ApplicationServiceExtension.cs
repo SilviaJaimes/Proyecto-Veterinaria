@@ -1,5 +1,6 @@
 using System.Text;
 using API.Helpers;
+using API.Services;
 using Aplicacion.UnitOfWork;
 using AspNetCoreRateLimit;
 using Dominio.Entities;
@@ -25,7 +26,7 @@ public static class ApplicationServiceExtension
     public static void AddAplicacionServices(this IServiceCollection services)
         {
             services.AddScoped<IPasswordHasher<Usuario>, PasswordHasher<Usuario>>();
-            /* services.AddScoped<IUserService, UserService>(); */ 
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
