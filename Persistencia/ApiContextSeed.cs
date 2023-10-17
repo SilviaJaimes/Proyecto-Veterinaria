@@ -17,7 +17,7 @@ public class ApiContextSeed
 
             if (!context.Veterinarios.Any())
             {
-                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/Veterinario.csv"))
+                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/veterinario.csv"))
                 {
                     using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
                     {
@@ -30,7 +30,7 @@ public class ApiContextSeed
 
             if (!context.Especies.Any())
             {
-                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/Especie.csv"))
+                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/especie.csv"))
                 {
                     using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
                     {
@@ -43,7 +43,7 @@ public class ApiContextSeed
 
             if (!context.Razas.Any())
             {
-                using (var reader = new StreamReader(ruta + @"\Data\Csvs\Raza.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\raza.csv"))
                 {
                     using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
@@ -71,7 +71,7 @@ public class ApiContextSeed
 
             if (!context.Propietarios.Any())
             {
-                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/Propietario.csv"))
+                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/propietario.csv"))
                 {
                     using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
                     {
@@ -84,7 +84,7 @@ public class ApiContextSeed
 
             if (!context.Proveedores.Any())
             {
-                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/Proveedor.csv"))
+                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/proveedor.csv"))
                 {
                     using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
                     {
@@ -97,7 +97,7 @@ public class ApiContextSeed
 
             if (!context.Usuarios.Any())
             {
-                using (var reader = new StreamReader(ruta + @"/Data/Csvs/Usuario.csv"))
+                using (var reader = new StreamReader(ruta + @"/Data/Csvs/usuario.csv"))
                 {
                     using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                     {
@@ -110,7 +110,7 @@ public class ApiContextSeed
 
             if (!context.Laboratorios.Any())
             {
-                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/Laboratorio.csv"))
+                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/laboratorio.csv"))
                 {
                     using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
                     {
@@ -123,7 +123,7 @@ public class ApiContextSeed
 
             if (!context.TipoMovimientos.Any())
             {
-                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/TipoMovimiento.csv"))
+                using (var readerEntity = new StreamReader("../Persistencia/Data/Csvs/tipoMovimiento.csv"))
                 {
                     using (var csv = new CsvReader(readerEntity, CultureInfo.InvariantCulture))
                     {
@@ -136,7 +136,7 @@ public class ApiContextSeed
 
             if (!context.Medicamentos.Any())
             {
-                using (var reader = new StreamReader(ruta + @"\Data\Csvs\Medicamento.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\medicamento.csv"))
                 {
                     using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
@@ -166,7 +166,7 @@ public class ApiContextSeed
 
             if (!context.Mascotas.Any())
             {
-                using (var reader = new StreamReader(ruta + @"\Data\Csvs\Mascota.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\mascota.csv"))
                 {
                     using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
@@ -196,7 +196,7 @@ public class ApiContextSeed
 
             if (!context.Citas.Any())
             {
-                using (var reader = new StreamReader(ruta + @"\Data\Csvs\Cita.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\cita.csv"))
                 {
                     using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
@@ -227,7 +227,7 @@ public class ApiContextSeed
 
             if (!context.MedicamentoProveedores.Any())
             {
-                using (var reader = new StreamReader(ruta + @"\Data\Csvs\MedicamentoProveedor.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\medicamentoProveedor.csv"))
                 {
                     using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
@@ -254,7 +254,7 @@ public class ApiContextSeed
 
             if (!context.MovimientoMedicamentos.Any())
             {
-                using (var reader = new StreamReader(ruta + @"\Data\Csvs\MovimientoMedicamento.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\movimientoMedicamento.csv"))
                 {
                     using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
@@ -283,7 +283,7 @@ public class ApiContextSeed
 
             if (!context.DetalleMovimientos.Any())
             {
-                using (var reader = new StreamReader(ruta + @"\Data\Csvs\DetalleMovimiento.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\detalleMovimiento.csv"))
                 {
                     using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
@@ -313,7 +313,7 @@ public class ApiContextSeed
 
             if (!context.TratamientoMedicos.Any())
             {
-                using (var reader = new StreamReader(ruta + @"\Data\Csvs\TratamientoMedico.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\tratamientoMedico.csv"))
                 {
                     using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
@@ -344,7 +344,7 @@ public class ApiContextSeed
 
             if (!context.RolUsuarios.Any())
             {
-                using (var reader = new StreamReader(ruta + @"\Data\Csvs\RolUsuario.csv"))
+                using (var reader = new StreamReader(ruta + @"\Data\Csvs\rolUsuario.csv"))
                 {
                     using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {

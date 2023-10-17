@@ -10,6 +10,8 @@ public class MovimientoMedicamentoConfiguration : IEntityTypeConfiguration<Movim
     {
         builder.ToTable("movimientoMedicamento");
 
+        builder.HasKey(x => x.Id);
+
         builder.Property(p => p.Id)
             .IsRequired();
 

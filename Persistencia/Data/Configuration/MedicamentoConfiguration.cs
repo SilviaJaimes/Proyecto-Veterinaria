@@ -10,6 +10,8 @@ public class MedicamentoConfiguration : IEntityTypeConfiguration<Medicamento>
     {
         builder.ToTable("medicamento");
 
+        builder.HasKey(x => x.Id);
+
         builder.Property(p => p.Id)
             .IsRequired();
 

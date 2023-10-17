@@ -10,6 +10,8 @@ public class LaboratorioConfiguration : IEntityTypeConfiguration<Laboratorio>
     {
         builder.ToTable("laboratorio");
 
+        builder.HasKey(x => x.Id);
+
         builder.Property(p => p.Id)
             .IsRequired();
 

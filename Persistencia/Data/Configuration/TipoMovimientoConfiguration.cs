@@ -10,6 +10,8 @@ public class TipoMovimientoConfiguration : IEntityTypeConfiguration<TipoMovimien
     {
         builder.ToTable("tipoMovimiento");
 
+        builder.HasKey(x => x.Id);
+
         builder.Property(p => p.Id)
             .IsRequired();
 

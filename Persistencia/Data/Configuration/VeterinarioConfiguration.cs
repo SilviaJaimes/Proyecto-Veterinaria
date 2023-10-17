@@ -10,6 +10,8 @@ public class VeterinarioConfiguration : IEntityTypeConfiguration<Veterinario>
     {
         builder.ToTable("veterinario");
 
+        builder.HasKey(x => x.Id);
+
         builder.Property(p => p.Id)
             .IsRequired();
 

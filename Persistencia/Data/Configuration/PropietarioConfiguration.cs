@@ -10,6 +10,8 @@ public class PropietarioConfiguration : IEntityTypeConfiguration<Propietario>
     {
         builder.ToTable("propietario");
 
+        builder.HasKey(x => x.Id);
+
         builder.Property(p => p.Id)
             .IsRequired();
 

@@ -10,6 +10,8 @@ public class EspecieConfiguration : IEntityTypeConfiguration<Especie>
     {
         builder.ToTable("especie");
 
+        builder.HasKey(x => x.Id);
+
         builder.Property(p => p.Id)
             .IsRequired();
 

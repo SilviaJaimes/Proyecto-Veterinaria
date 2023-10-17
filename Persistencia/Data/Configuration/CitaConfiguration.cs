@@ -10,6 +10,8 @@ public class CitaConfiguration : IEntityTypeConfiguration<Cita>
     {
         builder.ToTable("cita");
 
+        builder.HasKey(x => x.Id);
+
         builder.Property(p => p.Id)
             .IsRequired();
 

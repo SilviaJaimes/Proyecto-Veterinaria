@@ -10,6 +10,8 @@ public class MascotaConfiguration : IEntityTypeConfiguration<Mascota>
     {
         builder.ToTable("mascota");
 
+        builder.HasKey(x => x.Id);
+
         builder.Property(p => p.Id)
             .IsRequired();
 

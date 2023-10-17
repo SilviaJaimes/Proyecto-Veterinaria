@@ -10,6 +10,8 @@ public class DetalleMovimientoConfiguration : IEntityTypeConfiguration<DetalleMo
     {
         builder.ToTable("detalleMovimiento");
 
+        builder.HasKey(x => x.Id);
+
         builder.Property(p => p.Id)
             .IsRequired();
 

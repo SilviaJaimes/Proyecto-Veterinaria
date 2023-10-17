@@ -10,6 +10,8 @@ public class RazaConfiguration : IEntityTypeConfiguration<Raza>
     {
         builder.ToTable("raza");
 
+        builder.HasKey(x => x.Id);
+
         builder.Property(p => p.Id)
             .IsRequired();
 
