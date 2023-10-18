@@ -28,6 +28,32 @@ public class ProveedorRepository : GenericRepository<Proveedor>, IProveedor
         return proveedorMedicamento;
     }
 
+    public async Task<(int totalRegistros, IEnumerable<Object> registros)> ProveedorMedicamentoPaginated(string Medicamento, int pageIndex, int pageSize, string search = null)
+    {
+        var query = from mp in _context.MedicamentoProveedores
+                    where mp.Medicamento.Nombre.ToLower() == Medicamento.ToLower() 
+                    select new 
+                    {
+                        NombreMedicamento = mp.Medicamento.Nombre,
+                        NombreProveedor = mp.Proveedor.Nombre
+                    };
+
+        if (!string.IsNullOrEmpty(search))
+        {
+            var lowerSearch = search.ToLower();
+            query = query.Where(m => m.NombreMedicamento.ToLower().Contains(lowerSearch));
+        }
+
+        int totalRegistros = await query.CountAsync();
+
+        var registros = await query
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (totalRegistros, registros);
+    }
+
     public override async Task<IEnumerable<Proveedor>> GetAllAsync()
     {
         return await _context.Proveedores

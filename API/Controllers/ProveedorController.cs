@@ -58,6 +58,7 @@ public class ProveedorController : BaseApiController
     }
 
     [HttpGet("consulta-10/{Medicamento}")]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> ProveedorMedicamento(string Medicamento)
@@ -65,6 +66,17 @@ public class ProveedorController : BaseApiController
         var entidad = await unitofwork.Proveedores.ProveedorMedicamento(Medicamento);
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
+    }
+
+    [HttpGet("consulta-10/{Medicamento}")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> ProveedorMedicamentoPaginated(string Medicamento, [FromQuery] Params proveedorParams)
+    {
+        var entidad = await unitofwork.Proveedores.ProveedorMedicamentoPaginated(Medicamento, proveedorParams.PageIndex, proveedorParams.PageSize, proveedorParams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros); 
+        return new Pager<object>(listEntidad, entidad.totalRegistros, proveedorParams.PageIndex, proveedorParams.PageSize, proveedorParams.Search);
     }
 
     [HttpPost]

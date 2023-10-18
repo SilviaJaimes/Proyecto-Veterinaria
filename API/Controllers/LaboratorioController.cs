@@ -10,7 +10,7 @@ namespace API.Controllers;
 
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
-/* [Authorize] */
+[Authorize]
 
 public class LaboratorioController : BaseApiController
 {
@@ -58,6 +58,7 @@ public class LaboratorioController : BaseApiController
     }
 
     [HttpGet("consulta-2/{Laboratorio}")]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> MedicamentoLaboratorio(string Laboratorio)
@@ -74,41 +75,9 @@ public class LaboratorioController : BaseApiController
     public async Task<ActionResult<Pager<object>>> MedicamentoLaboratorioPaginated(string Laboratorio, [FromQuery] Params laboratorioParams)
     {
         var entidad = await unitofwork.Laboratorios.MedicamentoLaboratorioPaginated(Laboratorio, laboratorioParams.PageIndex, laboratorioParams.PageSize, laboratorioParams.Search);
-        var listEntidad = mapper.Map<List<object>>(entidad.registros); // Mapeo a object porque así está definido en tu método original.
+        var listEntidad = mapper.Map<List<object>>(entidad.registros);
         return new Pager<object>(listEntidad, entidad.totalRegistros, laboratorioParams.PageIndex, laboratorioParams.PageSize, laboratorioParams.Search);
     }
-
-    /* [HttpGet("consulta-2/{Laboratorio}")]
-    [MapToApiVersion("1.1")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Pager<object>>> MedicamentoLaboratorioPaginated(
-        string Laboratorio, 
-        [FromQuery] Params laboratorioParams)
-    {
-        if (laboratorioParams.PageIndex <= 0 || laboratorioParams.PageSize <= 0)
-        {
-            return BadRequest("Invalid pagination parameters.");
-        }
-
-        var entidad = await unitofwork.Laboratorios.MedicamentoLaboratorioPaginated(
-            Laboratorio, 
-            laboratorioParams.PageIndex, 
-            laboratorioParams.PageSize, 
-            laboratorioParams.Search
-        );
-        
-        var listEntidad = mapper.Map<List<object>>(entidad.registros);
-
-        return new Pager<object>(
-            listEntidad, 
-            entidad.totalRegistros, 
-            laboratorioParams.PageIndex, 
-            laboratorioParams.PageSize, 
-            laboratorioParams.Search
-        );
-    } */
-
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]

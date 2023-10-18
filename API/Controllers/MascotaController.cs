@@ -58,6 +58,7 @@ public class MascotaController : BaseApiController
     }
 
     [HttpGet("consulta-3/{Especie}")]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> MascotaEspecie(string Especie)
@@ -67,7 +68,19 @@ public class MascotaController : BaseApiController
         return Ok(dto);
     }
 
+    [HttpGet("consulta-3/{Especie}")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> MascotaEspeciePaginated(string Especie, [FromQuery] Params mascotaParams)
+    {
+        var entidad = await unitofwork.Mascotas.MascotaEspeciePaginated(Especie, mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros);
+        return new Pager<object>(listEntidad, entidad.totalRegistros, mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
+    }
+
     [HttpGet("consulta-6")]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> MascotasVacunadas2023()
@@ -77,7 +90,19 @@ public class MascotaController : BaseApiController
         return Ok(dto);
     }
 
+    [HttpGet("consulta-6")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> MascotasVacunadas2023Paginated([FromQuery] Params mascotaParams)
+    {
+        var entidad = await unitofwork.Mascotas.MascotasVacunadas2023Paginated(mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros); 
+        return new Pager<object>(listEntidad, entidad.totalRegistros, mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
+    }
+
     [HttpGet("consulta-7")]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> MascotasPorEspecie()
@@ -87,7 +112,19 @@ public class MascotaController : BaseApiController
         return Ok(dto);
     }
 
+    [HttpGet("consulta-7")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> MascotasPorEspeciePaginated([FromQuery] Params mascotaParams)
+    {
+        var entidad = await unitofwork.Mascotas.MascotasPorEspeciePaginated(mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros); 
+        return new Pager<object>(listEntidad, entidad.totalRegistros, mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
+    }
+
     [HttpGet("consulta-9/{Veterinario}")]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> MascotasPorVeterinario(string Veterinario)
@@ -97,7 +134,19 @@ public class MascotaController : BaseApiController
         return Ok(dto);
     }
 
+    [HttpGet("consulta-9/{Veterinario}")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> MascotasPorVeterinarioPaginated(string Veterinario, [FromQuery] Params mascotaParams)
+    {
+        var entidad = await unitofwork.Mascotas.MascotasPorVeterinarioPaginated(Veterinario, mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros); 
+        return new Pager<object>(listEntidad, entidad.totalRegistros, mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
+    }
+
     [HttpGet("consulta-11/{Raza}")]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> MascotasYPropietariosPorRaza(string Raza)
@@ -107,7 +156,19 @@ public class MascotaController : BaseApiController
         return Ok(dto);
     }
 
+    [HttpGet("consulta-11/{Raza}")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> MascotasYPropietariosPorRazaPaginated(string Raza, [FromQuery] Params mascotaParams)
+    {
+        var entidad = await unitofwork.Mascotas.MascotasYPropietariosPorRazaPaginated(Raza, mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros); 
+        return new Pager<object>(listEntidad, entidad.totalRegistros, mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
+    }
+
     [HttpGet("consulta-12")]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> CantidadMascotasPorRaza()
@@ -115,6 +176,17 @@ public class MascotaController : BaseApiController
         var entidad = await unitofwork.Mascotas.CantidadMascotasPorRaza();
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
+    }
+
+    [HttpGet("consulta-12")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> CantidadMascotasPorRazaPaginated([FromQuery] Params mascotaParams)
+    {
+        var entidad = await unitofwork.Mascotas.CantidadMascotasPorRazaPaginated(mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros); 
+        return new Pager<object>(listEntidad, entidad.totalRegistros, mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
     }
 
     [HttpPost]

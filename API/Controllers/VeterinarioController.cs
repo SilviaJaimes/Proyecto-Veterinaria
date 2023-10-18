@@ -58,6 +58,7 @@ public class VeterinarioController : BaseApiController
     }
 
     [HttpGet("consulta-1/{Especialidad}")]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> VeterinariosEspecialidad(string Especialidad)
@@ -65,6 +66,17 @@ public class VeterinarioController : BaseApiController
         var entidad = await unitofwork.Veterinarios.VeterinariosEspecialidad(Especialidad);
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
+    }
+
+    [HttpGet("consulta-1/{Especialidad}")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> VeterinariosEspecialidadPaginated(string Especialidad, [FromQuery] Params veterinarioParams)
+    {
+        var entidad = await unitofwork.Veterinarios.VeterinariosEspecialidadPaginated(Especialidad, veterinarioParams.PageIndex, veterinarioParams.PageSize, veterinarioParams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros); 
+        return new Pager<object>(listEntidad, entidad.totalRegistros, veterinarioParams.PageIndex, veterinarioParams.PageSize, veterinarioParams.Search);
     }
 
     [HttpPost]

@@ -58,6 +58,7 @@ public class MedicamentoController : BaseApiController
     }
 
     [HttpGet("consulta-5")]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> MedicamentoPrecio50000()
@@ -65,6 +66,17 @@ public class MedicamentoController : BaseApiController
         var entidad = await unitofwork.Medicamentos.MedicamentoPrecio50000();
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
+    }
+
+    [HttpGet("consulta-5")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> MedicamentoPrecio50000Paginated([FromQuery] Params mascotaParams)
+    {
+        var entidad = await unitofwork.Medicamentos.MedicamentoPrecio50000Paginated(mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros); 
+        return new Pager<object>(listEntidad, entidad.totalRegistros, mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
     }
 
     [HttpPost]

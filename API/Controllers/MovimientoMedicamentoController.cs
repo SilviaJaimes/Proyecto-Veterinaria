@@ -58,6 +58,7 @@ public class MovimientoMedicamentoController : BaseApiController
     }
 
     [HttpGet("consulta-8")]
+    [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<object>> MovimientosYValores()
@@ -65,6 +66,17 @@ public class MovimientoMedicamentoController : BaseApiController
         var entidad = await unitofwork.MovimientoMedicamentos.MovimientosYValores();
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
+    }
+
+    [HttpGet("consulta-8")]
+    [MapToApiVersion("1.1")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<object>>> MovimientosYValoresPaginated([FromQuery] Params mascotaParams)
+    {
+        var entidad = await unitofwork.MovimientoMedicamentos.MovimientosYValoresPaginated(mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
+        var listEntidad = mapper.Map<List<object>>(entidad.registros); 
+        return new Pager<object>(listEntidad, entidad.totalRegistros, mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
     }
 
     [HttpPost]
