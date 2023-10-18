@@ -29,7 +29,7 @@ public class LaboratorioRepository : GenericRepository<Laboratorio>, ILaboratori
         return medicamentoLaboratorio;
     }
 
-    /* public async Task<(int totalRegistros, IEnumerable<Object> registros)> MedicamentoLaboratorioPaginated(string Laboratorio, int pageIndex, int pageSize, string search = null)
+    public async Task<(int totalRegistros, IEnumerable<Object> registros)> MedicamentoLaboratorioPaginated(string Laboratorio, int pageIndex, int pageSize, string search = null)
     {
         // Obtener la consulta base.
         var query = from m in _context.Medicamentos
@@ -58,9 +58,9 @@ public class LaboratorioRepository : GenericRepository<Laboratorio>, ILaboratori
             .ToListAsync();
 
         return (totalRegistros, registros);
-    } */
+    }
 
-    public async Task<(int totalRegistros, IEnumerable<Object> registros)> MedicamentoLaboratorioPaginated(
+    /* public async Task<(int totalRegistros, IEnumerable<Object> registros)> MedicamentoLaboratorioPaginated(
         string Laboratorio, 
         int pageIndex, 
         int pageSize, 
@@ -90,7 +90,7 @@ public class LaboratorioRepository : GenericRepository<Laboratorio>, ILaboratori
             .ToListAsync();
 
         return (totalRegistros, registros);
-    }
+    } */
 
     public override async Task<IEnumerable<Laboratorio>> GetAllAsync()
     {

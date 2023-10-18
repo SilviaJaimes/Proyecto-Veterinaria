@@ -67,7 +67,7 @@ public class LaboratorioController : BaseApiController
         return Ok(dto);
     }
 
-    /* [HttpGet("consulta-2/{Laboratorio}")]
+    [HttpGet("consulta-2/{Laboratorio}")]
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -76,9 +76,9 @@ public class LaboratorioController : BaseApiController
         var entidad = await unitofwork.Laboratorios.MedicamentoLaboratorioPaginated(Laboratorio, laboratorioParams.PageIndex, laboratorioParams.PageSize, laboratorioParams.Search);
         var listEntidad = mapper.Map<List<object>>(entidad.registros); // Mapeo a object porque así está definido en tu método original.
         return new Pager<object>(listEntidad, entidad.totalRegistros, laboratorioParams.PageIndex, laboratorioParams.PageSize, laboratorioParams.Search);
-    } */
+    }
 
-    [HttpGet("consulta-2/{Laboratorio}")]
+    /* [HttpGet("consulta-2/{Laboratorio}")]
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -107,7 +107,7 @@ public class LaboratorioController : BaseApiController
             laboratorioParams.PageSize, 
             laboratorioParams.Search
         );
-    }
+    } */
 
 
     [HttpPost]
