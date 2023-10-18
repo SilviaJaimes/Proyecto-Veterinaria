@@ -192,4 +192,4 @@ A todas las librerías y herramientas utilizadas en este proyecto.
 
 A ti, por considerar el uso de este sistema.
 
-⌨️ con ❤️ por Silvia 😊
+⌨️ con ❤️ por Silvia.
