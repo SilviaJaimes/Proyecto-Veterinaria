@@ -14,7 +14,7 @@ Este proyecto proporciona una API que permite gestionar todo el apartado de la a
 
 Una vez que el proyecto esté en marcha, puedes acceder a los diferentes endpoints disponibles:
 
-## 1. Registro de Usuarios
+## 1. Registro de Usuarios 📝:
 
 **Endpoint**: `http://localhost:5158/api/register`
 
@@ -31,7 +31,7 @@ json
 
 Este endpoint permite a los usuarios registrarse en el sistema.
 
-## 2. Generación del token:
+## 2. Generación del token 🔑:
 
 **Endpoint**: `http://localhost:5158/api/token`
 
@@ -46,7 +46,7 @@ Este endpoint permite a los usuarios registrarse en el sistema.
 
 Una vez registrado el usuario tendrá que ingresar para recibir un token, este será ingresado al siguiente Endpoint que es el de Refresh Token.
 
-## 3. Refresh Token:
+## 3. Refresh Token 🔄:
 
 **Endpoint**: `http://localhost:5158/api/refresh-token`
 
@@ -87,7 +87,7 @@ Para realizar la paginación se va al apartado de "Query" y se ingresa lo siguie
 ![image](https://github.com/SilviaJaimes/Proyecto-Veterinaria/assets/132016483/22683e46-037e-4f30-96b8-161df8622b40)
 
 
-## 1. Visualizar los veterinarios cuya especialidad sea Cirujano vascular:
+## 1. Visualizar los veterinarios cuya especialidad sea Cirujano vascular 🩺:
 
 **Endpoint**: `http://localhost:5158/api/veterinario/consulta-1/{Especialidad}`
 
@@ -96,7 +96,7 @@ Para realizar la paginación se va al apartado de "Query" y se ingresa lo siguie
 En este caso para realizar la consulta se ingresa la especialidad de la que quiera conocer los veterinarios en la última parte del Endpoint: {Especialidad} = `Cirujano vascular`.
 
 
-## 2. Listar los medicamentos que pertenezcan a el laboratorio Genfar:
+## 2. Listar los medicamentos que pertenezcan a el laboratorio Genfar 💊:
 
 **Endpoint**: `http://localhost:5158/api/laboratorio/consulta-2/{Laboratorio}`
 
@@ -105,7 +105,7 @@ En este caso para realizar la consulta se ingresa la especialidad de la que quie
 Para realizar la consulta se ingresa el laboratorio del que desea conocer los medicamentos en la última parte del Endpoint: {Laboratorio} = `Genfar`.
 
 
-## 3. Mostrar las mascotas que se encuentren registradas cuya especie sea felina:
+## 3. Mostrar las mascotas que se encuentren registradas cuya especie sea felina 🐱:
 
 **Endpoint**: `http://localhost:5158/api/mascota/consulta-3/{Especie}`
 
@@ -114,42 +114,42 @@ Para realizar la consulta se ingresa el laboratorio del que desea conocer los me
 Para realizar la consulta se ingresa la especie de la que desea conocer las mascotas en la última parte del Endpoint: {Especie} = `Felino`.
 
 
-## 4. Listar los propietarios y sus mascotas:
+## 4. Listar los propietarios y sus mascotas 🚶‍♂️🐕:
 
 **Endpoint**: `http://localhost:5158/api/propietario/consulta-4`
 
 **Método**: `GET`
 
 
-## 5. Listar los medicamentos que tenga un precio de venta mayor a 50000:
+## 5. Listar los medicamentos que tenga un precio de venta mayor a 50000 💸:
 
 **Endpoint**: `http://localhost:5158/api/medicamento/consulta-5`
 
 **Método**: `GET`
 
 
-## 6. Listar las mascotas que fueron atendidas por motivo de vacunacion en el primer trimestre del 2023:
+## 6. Listar las mascotas que fueron atendidas por motivo de vacunacion en el primer trimestre del 2023 💉:
 
 **Endpoint**: `http://localhost:5158/api/mascota/consulta-6`
 
 **Método**: `GET`
 
 
-## 7. Listar todas las mascotas agrupadas por especie:
+## 7. Listar todas las mascotas agrupadas por especie 🦔🐕🐈:
 
 **Endpoint**: `http://localhost:5158/api/mascota/consulta-7`
 
 **Método**: `GET`
 
 
-## 8. Listar todos los movimientos de medicamentos y el valor total de cada movimiento:
+## 8. Listar todos los movimientos de medicamentos y el valor total de cada movimiento 📦:
 
 **Endpoint**: `http://localhost:5158/api/movimientoMedicamento/consulta-8`
 
 **Método**: `GET`
 
 
-## 9. Listar las mascotas que fueron atendidas por un determinado veterinario:
+## 9. Listar las mascotas que fueron atendidas por un determinado veterinario 🩺🐕:
 
 **Endpoint**: `http://localhost:5158/api/mascota/consulta-9/{Veterinario}`
 
@@ -157,7 +157,7 @@ Para realizar la consulta se ingresa la especie de la que desea conocer las masc
 
 Para realizar la consulta se ingresa el veterinario del que desea conocer que mascotas fueron atendidas por este en la última parte del Endpoint: {Veterinario} = `Vet Perez`.
 
-## 10. Listar los proveedores que me venden un determinado medicamento:
+## 10. Listar los proveedores que me venden un determinado medicamento 🛍️:
 
 **Endpoint**: `http://localhost:5158/api/proveedor/consulta-10/{Medicamento}`
 
@@ -165,7 +165,7 @@ Para realizar la consulta se ingresa el veterinario del que desea conocer que ma
 
 Para realizar la consulta se ingresa el proveedor del que desea conocer que medicamentos vendio en la última parte del Endpoint: {Medicamento} = `Medicamento A`.
 
-## 11. Listar las mascotas y sus propietarios cuya raza sea Golden Retriver:
+## 11. Listar las mascotas y sus propietarios cuya raza sea Golden Retriver 🐕🚶:
 
 **Endpoint**: `http://localhost:5158/api/mascota/consulta-11/{Raza}`
 
@@ -173,7 +173,7 @@ Para realizar la consulta se ingresa el proveedor del que desea conocer que medi
 
 Para realizar la consulta se ingresa la raza en la última parte del Endpoint: {Raza} = `Golden Retriver`.
 
-## 12. Listar la cantidad de mascotas que pertenecen a una raza:
+## 12. Listar la cantidad de mascotas que pertenecen a una raza 📊:
 
 **Endpoint**: `http://localhost:5158/api/mascota/consulta-12`
 
