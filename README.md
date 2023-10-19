@@ -14,9 +14,29 @@ Este proyecto proporciona una API que permite gestionar todo el apartado de la a
 
 Una vez que el proyecto esté en marcha, puedes acceder a los diferentes endpoints disponibles:
 
-## 1. Registro de Usuarios 📝:
+ En el archivo CSV se encuentra registrado el administrador con:  
+ **usuario**: `Admini`  
+ **Contraseña**: `pass1234`   
+ Necesitaremos de este usuario para obtener el token que se utilizará para el registro de usuarios, ya que solo el administrador podra hacer todo con respecto al CRUD de los usuarios.
 
-**Endpoint**: `http://localhost:5158/api/register`
+## 1. Generación del token 🔑:
+
+**Endpoint**: `http://localhost:5158/api/usuario/token`
+
+**Método**: `POST`
+
+**Payload**:
+
+`{
+    "Nombre": "Admini",
+    "Contraseña": "pass1234"
+}`
+
+Al obtener el token del administrador, se podrá realizar el registro de usuarios.
+
+## 2. Registro de Usuarios 📝:
+
+**Endpoint**: `http://localhost:5158/api/usuario/register`
 
 **Método**: `POST`
 
@@ -31,24 +51,11 @@ json
 
 Este endpoint permite a los usuarios registrarse en el sistema.
 
-## 2. Generación del token 🔑:
-
-**Endpoint**: `http://localhost:5158/api/token`
-
-**Método**: `POST`
-
-**Payload**:
-
-`{
-    "Nombre": "<nombre_de_usuario>",
-    "Contraseña": "<contraseña>"
-}`
-
 Una vez registrado el usuario tendrá que ingresar para recibir un token, este será ingresado al siguiente Endpoint que es el de Refresh Token.
 
 ## 3. Refresh Token 🔄:
 
-**Endpoint**: `http://localhost:5158/api/refresh-token`
+**Endpoint**: `http://localhost:5158/api/usuario/refresh-token`
 
 **Método**: `POST`
 
