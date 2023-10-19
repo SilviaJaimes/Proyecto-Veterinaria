@@ -383,10 +383,8 @@ public class ApiContextSeed
             {
                 var roles = new List<Rol>()
                         {
-                            new Rol{Id=1, Nombre="Empleado"},
-                            new Rol{Id=2, Nombre="Proveedor"},
-                            new Rol{Id=3, Nombre="Propietario"},
-                            new Rol{Id=4, Nombre="Veterinario"}
+                            new Rol{Id=1, Nombre="Administrador"},
+                            new Rol{Id=2, Nombre="Empleado"}
                         };
                 context.Roles.AddRange(roles);
                 await context.SaveChangesAsync();

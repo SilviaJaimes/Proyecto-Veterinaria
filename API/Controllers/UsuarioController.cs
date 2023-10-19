@@ -4,6 +4,7 @@ using API.Services;
 using AutoMapper;
 using Dominio.Entities;
 using Dominio.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -25,6 +26,7 @@ public class UsuarioController : BaseApiController
     }
 
     [HttpGet]
+    [Authorize(Roles = "Administrador")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -35,6 +37,7 @@ public class UsuarioController : BaseApiController
     }
 
     [HttpGet("{id}")]
+    [Authorize(Roles = "Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -49,6 +52,7 @@ public class UsuarioController : BaseApiController
     }
 
     [HttpGet]
+    [Authorize(Roles = "Administrador")]
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -60,6 +64,7 @@ public class UsuarioController : BaseApiController
     }
 
     [HttpPost("register")]
+    [Authorize(Roles = "Administrador")]
     public async Task<ActionResult> RegisterAsync(RegisterDto model)
     {
         var result = await _userService.RegisterAsync(model);
@@ -69,14 +74,13 @@ public class UsuarioController : BaseApiController
     [HttpPost("token")]
     public async Task<IActionResult> GetTokenAsync(LoginDto model)
     {
-        Console.WriteLine("2");
         var result = await _userService.GetTokenAsync(model);
-        Console.WriteLine("3");
         SetRefreshTokenInCookie(result.RefreshToken);
         return Ok(result);
     }
 
     [HttpPost("addrole")]
+    [Authorize(Roles = "Administrador")]
     public async Task<IActionResult> AddRoleAsync(AddRoleDto model)
     {
         var result = await _userService.AddRoleAsync(model);
@@ -84,6 +88,7 @@ public class UsuarioController : BaseApiController
     }
 
     [HttpPost("refresh-token")]
+    [Authorize]
     public async Task<IActionResult> RefreshToken()
     {
         var refreshToken = Request.Cookies["refreshToken"];
@@ -94,6 +99,7 @@ public class UsuarioController : BaseApiController
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Administrador")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -110,6 +116,7 @@ public class UsuarioController : BaseApiController
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrador")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
