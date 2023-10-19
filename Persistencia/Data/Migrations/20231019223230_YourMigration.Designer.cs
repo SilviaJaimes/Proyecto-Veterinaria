@@ -11,7 +11,7 @@ using Persistencia;
 namespace Persistencia.Data.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20231019195421_YourMigration")]
+    [Migration("20231019223230_YourMigration")]
     partial class YourMigration
     {
         /// <inheritdoc />
@@ -160,8 +160,7 @@ namespace Persistencia.Data.Migrations
 
                     b.HasIndex("IdPropietarioFk");
 
-                    b.HasIndex("IdRazaFk")
-                        .IsUnique();
+                    b.HasIndex("IdRazaFk");
 
                     b.ToTable("mascota", (string)null);
                 });
@@ -542,8 +541,8 @@ namespace Persistencia.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Dominio.Entities.Raza", "Raza")
-                        .WithOne("Mascotas")
-                        .HasForeignKey("Dominio.Entities.Mascota", "IdRazaFk")
+                        .WithMany("Mascotas")
+                        .HasForeignKey("IdRazaFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

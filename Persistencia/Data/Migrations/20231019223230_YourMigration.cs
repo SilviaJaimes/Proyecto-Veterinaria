@@ -449,8 +449,7 @@ namespace Persistencia.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_mascota_IdRazaFk",
                 table: "mascota",
-                column: "IdRazaFk",
-                unique: true);
+                column: "IdRazaFk");
 
             migrationBuilder.CreateIndex(
                 name: "IX_medicamento_IdLaboratorioFk",

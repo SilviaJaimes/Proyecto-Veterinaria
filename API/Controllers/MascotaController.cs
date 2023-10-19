@@ -10,8 +10,8 @@ namespace API.Controllers;
 
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
-[Authorize]
-
+/* [Authorize]
+ */
 public class MascotaController : BaseApiController
 {
     private readonly IUnitOfWork unitofwork;
@@ -188,7 +188,6 @@ public class MascotaController : BaseApiController
         var listEntidad = mapper.Map<List<object>>(entidad.registros); 
         return new Pager<object>(listEntidad, entidad.totalRegistros, mascotaParams.PageIndex, mascotaParams.PageSize, mascotaParams.Search);
     }
-
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -199,11 +198,13 @@ public class MascotaController : BaseApiController
         await unitofwork.SaveAsync();
         if(entidad == null)
         {
+            Console.WriteLine("ESTE ES ");
             return BadRequest();
         }
         entidadDto.Id = entidad.Id;
         return CreatedAtAction(nameof(Post), new {id = entidadDto.Id}, entidadDto);
     }
+    
 
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]

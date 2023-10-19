@@ -1,7 +1,5 @@
-Id,Nombre,FechaNacimiento,IdPropietarioFk,IdRazaFk
-1,Whiskers,2021-01-10,1,1
-2,Buddy,2020-05-05,2,2
-3,Shadow,2019-08-15,3,1
-4,Max,2021-09-30,4,2
-5,Bella,2019-02-14,5,3
-6,Luna,2020-12-09,1,1
+Id,IdPropietarioFk,IdRazaFk,Nombre,FechaNacimiento
+1,1,1,Mascota 1,2020-01-01
+2,2,2,Mascota 2,2020-02-02
+3,3,3,Mascota 3,2020-03-03
+4,1,4,Mascota 4,2020-04-04

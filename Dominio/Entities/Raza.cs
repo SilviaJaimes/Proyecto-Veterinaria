@@ -6,5 +6,5 @@ public class Raza : BaseEntity
     public int IdEspecieFk { get; set; }
     public Especie Especie { get; set; }
 
-    public virtual Mascota Mascotas { get; set; }
+    public ICollection<Mascota> Mascotas { get; set; }
 }
