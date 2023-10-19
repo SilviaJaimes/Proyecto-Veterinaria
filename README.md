@@ -15,8 +15,8 @@ Este proyecto proporciona una API que permite gestionar todo el apartado de la a
 Una vez que el proyecto esté en marcha, puedes acceder a los diferentes endpoints disponibles:
 
  En el archivo CSV se encuentra registrado el administrador con:  
- **usuario**: `Admini`
- **Contraseña**: `pass1234` 
+ **usuario**: `Admini`  
+ **Contraseña**: `pass1234`   
  Necesitaremos de este usuario para obtener el token que se utilizará para el registro de usuarios, ya que solo el administrador podra hacer todo con respecto al CRUD de los usuarios.
 
 ## 1. Generación del token 🔑:
