@@ -21,16 +21,16 @@ Una vez que el proyecto esté en marcha, puedes acceder a los diferentes endpoin
 
 ## 1. Generación del token 🔑:
 
-   **Endpoint**: `http://localhost:5158/api/usuario/token`
-   
-   **Método**: `POST`
-   
-   **Payload**:
-   
-   `{
-       "Nombre": "Admini",
-       "Contraseña": "pass1234"
-   }`
+    **Endpoint**: `http://localhost:5158/api/usuario/token`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+        "Nombre": "Admini",
+        "Contraseña": "pass1234"
+    }`
 
 Al obtener el token del administrador, se podrá realizar el registro de usuarios.
 
