@@ -14,6 +14,205 @@ Este proyecto proporciona una API que permite gestionar todo el apartado de la a
 
 Una vez que el proyecto esté en marcha, puedes acceder a los diferentes endpoints disponibles:
 
+##Método POST  
+**Especie**
+
+    **Endpoint**: `http://localhost:5158/api/especie`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+      "Nombre": "Ave"
+    }`  
+    
+**Raza**
+
+    **Endpoint**: `http://localhost:5158/api/raza`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+      "Nombre": "Lechuza",
+      "IdEspecieFk": 6
+    }`  
+    
+**Laboratorio**
+
+    **Endpoint**: `http://localhost:5158/api/laboratorio`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+      "Nombre": "Alemana",
+      "Direccion": "no se",
+      "Telefono": "12345"
+    }`  
+    
+**Veterinario**
+
+    **Endpoint**: `http://localhost:5158/api/veterinario`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+      "Nombre": "Owen",
+      "Direccion": "Diamante",
+      "Telefono": "12345",
+      "Especialidad": "Cirujano"
+    }`  
+    
+ **Proveedor**
+
+    **Endpoint**: `http://localhost:5158/api/proveedor`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+      "Nombre": "Owen",
+      "Direccion": "Diamante",
+      "Telefono": "12345"
+    }`  
+    
+ **Propietario**
+
+    **Endpoint**: `http://localhost:5158/api/propietario`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+      "Nombre": "Silvia",
+      "CorreoElectronico": "correo@gmail.com",
+      "Telefono": "12345"
+    }`  
+    
+ **Rol**
+
+    **Endpoint**: `http://localhost:5158/api/rol`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+      "Nombre": "Cliente"
+    }`  
+    
+ **TipoMovimiento**
+
+    **Endpoint**: `http://localhost:5158/api/tipoMovimiento`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+      "Descripcion": "Entrada"
+    }`  
+    
+ **Medicamento**
+
+    **Endpoint**: `http://localhost:5158/api/medicamento`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+      "Nombre": "Acetaminofen",
+      "CantidadDisponible": 10,
+      "Precio": 50000,
+      "IdLaboratorioFk": 5
+    }`  
+    
+ **DetalleMovimiento**
+
+    **Endpoint**: `http://localhost:5158/api/detalleMovimiento`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+      "Cantidad": 10,
+      "Precio": 50000,
+      "IdMedicamentoFk": 5,
+      "IdMovMedFk": 2
+    }`  
+    
+**TratamientoMedico**
+
+    **Endpoint**: `http://localhost:5158/api/tratamientoMedico`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+      "IdCitaFk": 5,
+      "IdMedicamentoFk": 5,
+      "Dosis": 16,
+      "FechaAdministracion": "2023-07-23",
+      "Observacion": "Limitación"
+    }`  
+    
+**MovimientoMedicamento**
+
+    **Endpoint**: `http://localhost:5158/api/movimientoMedicamento`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+      "Cantidad": 5,
+      "Fecha": "2023-07-23",
+      "IdTipoMov": 1
+    }`  
+
+**Mascota**
+
+    **Endpoint**: `http://localhost:5158/api/mascota`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+      "nombre": "Michi",
+      "fechaNacimiento": "2019-02-14",
+      "idPropietarioFk": 1,
+      "idRazaFk": 2
+    }`  
+
+**Cita**
+
+    **Endpoint**: `http://localhost:5158/api/cita`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+       "Fecha": "2023-07-23",
+       "Hora": "2023-07-23",
+       "Motivo": "Vacunacion",
+       "IdMascotaFk": 6,
+       "IdVeterinarioFk": 1
+     }`
+
+
  En el archivo CSV se encuentra registrado el administrador con:  
  **usuario**: `Admini`  
  **Contraseña**: `pass1234`   
@@ -21,33 +220,33 @@ Una vez que el proyecto esté en marcha, puedes acceder a los diferentes endpoin
 
 ## 1. Generación del token 🔑:
 
-**Endpoint**: `http://localhost:5158/api/usuario/token`
-
-**Método**: `POST`
-
-**Payload**:
-
-`{
-    "Nombre": "Admini",
-    "Contraseña": "pass1234"
-}`
+    **Endpoint**: `http://localhost:5158/api/usuario/token`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+        "Nombre": "Admini",
+        "Contraseña": "pass1234"
+    }`
 
 Al obtener el token del administrador, se podrá realizar el registro de usuarios.
 
 ## 2. Registro de Usuarios 📝:
 
-**Endpoint**: `http://localhost:5158/api/usuario/register`
-
-**Método**: `POST`
-
-**Payload**:
-
-json
-`{
-    "Usuario": "<nombre_de_usuario>",
-    "Contraseña": "<contraseña>",
-    "CorreoElectronico": "<correo_electronico>"
-}`
+    **Endpoint**: `http://localhost:5158/api/usuario/register`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    json
+    `{
+        "Usuario": "<nombre_de_usuario>",
+        "Contraseña": "<contraseña>",
+        "CorreoElectronico": "<correo_electronico>"
+    }`
 
 Este endpoint permite a los usuarios registrarse en el sistema.
 
@@ -55,16 +254,16 @@ Una vez registrado el usuario tendrá que ingresar para recibir un token, este s
 
 ## 3. Refresh Token 🔄:
 
-**Endpoint**: `http://localhost:5158/api/usuario/refresh-token`
-
-**Método**: `POST`
-
-**Payload**:
-
-`{
-    "Nombre": "<nombre_de_usuario>",
-    "Contraseña": "<contraseña>"
-}`
+    **Endpoint**: `http://localhost:5158/api/usuario/refresh-token`
+    
+    **Método**: `POST`
+    
+    **Payload**:
+    
+    `{
+        "Nombre": "<nombre_de_usuario>",
+        "Contraseña": "<contraseña>"
+    }`
 
 Se dejan los mismos datos en el Body y luego se ingresa al "Auth", "Bearer", allí se ingresa el token obtenido en el anterior Endpoint.
 
@@ -96,95 +295,95 @@ Para realizar la paginación se va al apartado de "Query" y se ingresa lo siguie
 
 ## 1. Visualizar los veterinarios cuya especialidad sea Cirujano vascular 🩺:
 
-**Endpoint**: `http://localhost:5158/api/veterinario/consulta-1/{Especialidad}`
-
-**Método**: `GET`
+    **Endpoint**: `http://localhost:5158/api/veterinario/consulta-1/{Especialidad}`
+    
+    **Método**: `GET`
 
 En este caso para realizar la consulta se ingresa la especialidad de la que quiera conocer los veterinarios en la última parte del Endpoint: {Especialidad} = `Cirujano vascular`.
 
 
 ## 2. Listar los medicamentos que pertenezcan a el laboratorio Genfar 💊:
 
-**Endpoint**: `http://localhost:5158/api/laboratorio/consulta-2/{Laboratorio}`
-
-**Método**: `GET`
+    **Endpoint**: `http://localhost:5158/api/laboratorio/consulta-2/{Laboratorio}`
+    
+    **Método**: `GET`
 
 Para realizar la consulta se ingresa el laboratorio del que desea conocer los medicamentos en la última parte del Endpoint: {Laboratorio} = `Genfar`.
 
 
 ## 3. Mostrar las mascotas que se encuentren registradas cuya especie sea felina 🐱:
 
-**Endpoint**: `http://localhost:5158/api/mascota/consulta-3/{Especie}`
-
-**Método**: `GET`
+    **Endpoint**: `http://localhost:5158/api/mascota/consulta-3/{Especie}`
+    
+    **Método**: `GET`
 
 Para realizar la consulta se ingresa la especie de la que desea conocer las mascotas en la última parte del Endpoint: {Especie} = `Felino`.
 
 
 ## 4. Listar los propietarios y sus mascotas 🚶‍♂️🐕:
 
-**Endpoint**: `http://localhost:5158/api/propietario/consulta-4`
-
-**Método**: `GET`
+    **Endpoint**: `http://localhost:5158/api/propietario/consulta-4`
+    
+    **Método**: `GET`
 
 
 ## 5. Listar los medicamentos que tenga un precio de venta mayor a 50000 💸:
 
-**Endpoint**: `http://localhost:5158/api/medicamento/consulta-5`
-
-**Método**: `GET`
+    **Endpoint**: `http://localhost:5158/api/medicamento/consulta-5`
+    
+    **Método**: `GET`
 
 
 ## 6. Listar las mascotas que fueron atendidas por motivo de vacunacion en el primer trimestre del 2023 💉:
 
-**Endpoint**: `http://localhost:5158/api/mascota/consulta-6`
-
-**Método**: `GET`
+    **Endpoint**: `http://localhost:5158/api/mascota/consulta-6`
+    
+    **Método**: `GET`
 
 
 ## 7. Listar todas las mascotas agrupadas por especie 🦔🐕🐈:
 
-**Endpoint**: `http://localhost:5158/api/mascota/consulta-7`
-
-**Método**: `GET`
+    **Endpoint**: `http://localhost:5158/api/mascota/consulta-7`
+    
+    **Método**: `GET`
 
 
 ## 8. Listar todos los movimientos de medicamentos y el valor total de cada movimiento 📦:
 
-**Endpoint**: `http://localhost:5158/api/movimientoMedicamento/consulta-8`
-
-**Método**: `GET`
+    **Endpoint**: `http://localhost:5158/api/movimientoMedicamento/consulta-8`
+    
+    **Método**: `GET`
 
 
 ## 9. Listar las mascotas que fueron atendidas por un determinado veterinario 🩺🐕:
 
-**Endpoint**: `http://localhost:5158/api/mascota/consulta-9/{Veterinario}`
-
-**Método**: `GET`
+    **Endpoint**: `http://localhost:5158/api/mascota/consulta-9/{Veterinario}`
+    
+    **Método**: `GET`
 
 Para realizar la consulta se ingresa el veterinario del que desea conocer que mascotas fueron atendidas por este en la última parte del Endpoint: {Veterinario} = `Vet Perez`.
 
 ## 10. Listar los proveedores que me venden un determinado medicamento 🛍️:
 
-**Endpoint**: `http://localhost:5158/api/proveedor/consulta-10/{Medicamento}`
-
-**Método**: `GET`
+    **Endpoint**: `http://localhost:5158/api/proveedor/consulta-10/{Medicamento}`
+    
+    **Método**: `GET`
 
 Para realizar la consulta se ingresa el proveedor del que desea conocer que medicamentos vendio en la última parte del Endpoint: {Medicamento} = `Medicamento A`.
 
 ## 11. Listar las mascotas y sus propietarios cuya raza sea Golden Retriver 🐕🚶:
 
-**Endpoint**: `http://localhost:5158/api/mascota/consulta-11/{Raza}`
-
-**Método**: `GET`
+    **Endpoint**: `http://localhost:5158/api/mascota/consulta-11/{Raza}`
+    
+    **Método**: `GET`
 
 Para realizar la consulta se ingresa la raza en la última parte del Endpoint: {Raza} = `Golden Retriver`.
 
 ## 12. Listar la cantidad de mascotas que pertenecen a una raza 📊:
 
-**Endpoint**: `http://localhost:5158/api/mascota/consulta-12`
-
-**Método**: `GET`
+    **Endpoint**: `http://localhost:5158/api/mascota/consulta-12`
+    
+    **Método**: `GET`
 
 ## Desarrollo ⌨️
 Este proyecto utiliza varias tecnologías y patrones, incluidos:
